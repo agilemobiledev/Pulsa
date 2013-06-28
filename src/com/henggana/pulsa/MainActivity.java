@@ -3,9 +3,9 @@ package com.henggana.pulsa;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.view.Menu;
+//import android.view.ContextMenu;
+//import android.view.ContextMenu.ContextMenuInfo;
+//import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -17,7 +17,7 @@ public class MainActivity extends ListActivity {
 	
 	TextView selection;
 	
-	private ArrayAdapter arrayAdapter;
+//	private ArrayAdapter arrayAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

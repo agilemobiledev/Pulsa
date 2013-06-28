@@ -39,7 +39,7 @@ public class Produk {
 		return nominal;
 	}
 
-	public void setNominal(Long nominal) {
+	public void setNominal(long nominal) {
 		this.nominal = nominal;
 	}
 	
@@ -47,7 +47,7 @@ public class Produk {
 		return hargaServer;
 	}
 
-	public void setHargaServer(Long hargaServer) {
+	public void setHargaServer(long hargaServer) {
 		this.hargaServer = hargaServer;
 	}
 	
@@ -55,7 +55,7 @@ public class Produk {
 		return hargaAgen;
 	}
 
-	public void setHargaAgen(Long hargaAgen) {
+	public void setHargaAgen(long hargaAgen) {
 		this.hargaAgen = hargaAgen;
 	}
 	
@@ -81,7 +81,7 @@ public class Produk {
 	@Override
 	public String toString() {
 
-		String stringAppearInListView = this.providerId+", "+this.kode+", "+this.nominal+", "+this.hargaServer;
+		String stringAppearInListView = this.kode+", "+this.nominal+", "+this.hargaServer+", "+this.hargaAgen;
 		return stringAppearInListView;
 	}
 }

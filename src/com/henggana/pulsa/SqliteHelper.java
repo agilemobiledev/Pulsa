@@ -1,5 +1,9 @@
 	package com.henggana.pulsa;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -39,17 +43,17 @@ public class SqliteHelper extends SQLiteOpenHelper {
 	/*
 	 * CREATE TABLE PROVIDER
 	 */
-//	private static final String CREATE_TABLE_PRODUK = String.format(
-//			"create table %s (%s integer not null primary key autoincrement, %s integer not null, %s text, %s integer, %s integer, %s integer, %s date, %s date);",
-//			SQLITE_TABLE_PRODUK, SQLITE_TABLE_PRODUK_COL_ID, SQLITE_TABLE_PRODUK_COL_ID_PROVIDER, SQLITE_TABLE_PRODUK_COL_KODE, SQLITE_TABLE_PRODUK_COL_NOMINAL,
-//			SQLITE_TABLE_PRODUK_COL_HARGA_SERVER, SQLITE_TABLE_PRODUK_COL_HARGA_AGEN, SQLITE_TABLE_PRODUK_COL_CREATED_AT, SQLITE_TABLE_PRODUK_COL_UPDATED_AT
-//			);
-	
 	private static final String CREATE_TABLE_PRODUK = String.format(
+			"create table %s (%s integer not null primary key autoincrement, %s integer not null, %s text, %s integer, %s integer, %s integer, %s text, %s text);",
+			SQLITE_TABLE_PRODUK, SQLITE_TABLE_PRODUK_COL_ID, SQLITE_TABLE_PRODUK_COL_ID_PROVIDER, SQLITE_TABLE_PRODUK_COL_KODE, SQLITE_TABLE_PRODUK_COL_NOMINAL,
+			SQLITE_TABLE_PRODUK_COL_HARGA_SERVER, SQLITE_TABLE_PRODUK_COL_HARGA_AGEN, SQLITE_TABLE_PRODUK_COL_CREATED_AT, SQLITE_TABLE_PRODUK_COL_UPDATED_AT
+			);
+	
+	/*private static final String CREATE_TABLE_PRODUK = String.format(
 			"create table %s (%s integer not null primary key autoincrement, %s integer, %s text, %s integer, %s integer, %s integer);",
 			SQLITE_TABLE_PRODUK, SQLITE_TABLE_PRODUK_COL_ID, SQLITE_TABLE_PRODUK_COL_ID_PROVIDER, SQLITE_TABLE_PRODUK_COL_KODE, SQLITE_TABLE_PRODUK_COL_NOMINAL,
 			SQLITE_TABLE_PRODUK_COL_HARGA_SERVER, SQLITE_TABLE_PRODUK_COL_HARGA_AGEN
-			);
+			);*/
 	
 	public SqliteHelper(Context context) {
 		super(context, SQLITE_DATABASE, null, 1);
@@ -64,10 +68,19 @@ public class SqliteHelper extends SQLiteOpenHelper {
 			"select 'Simpati' as nama, '0812'as 'nomor_awalan'" +
 			"union select 'Indosat', '0856'";
 	
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+	Date date = new Date();
+	ContentValues initialValues = new ContentValues(); 
+//	initialValues.put("date_created", dateFormat.format(date));
+//	long rowId = mDb.insert(DATABASE_TABLE, null, initialValues);
+	
+	String now = dateFormat.format(date).toString();
+	
 	String dummyProdukSql =
-			"INSERT or replace INTO produk (id_provider, kode, nominal, harga_server, harga_agen)" +
+			"INSERT or replace INTO produk (id_provider, kode, nominal, harga_server, harga_agen, created_at, updated_at)" +
 			"select 1 as id_provider, 'I10' as kode, 10000 as nominal, 10900 as harga_server, 11500 as harga_agen " +
-			"union select 2, 'S20', 20000, 20800, 21500";
+			", '"+now+"' as created_at, '"+now+"' as updated_at "+
+			"union select 2, 'S20', 20000, 20800, 21500, '"+now+"', '"+now+"'";
                 
 
 	@Override

@@ -1,5 +1,6 @@
 package com.henggana.pulsa;
 
+//import java.text.SimpleDateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,22 +10,23 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+//import java.util.Date;
 
 public class DataSourceProduk {
 
 	private SQLiteDatabase db;
 	private SqliteHelper dbHelper;
 
-//	private static String[] allColoumns = { SqliteHelper.SQLITE_TABLE_PRODUK_COL_ID,
-//			SqliteHelper.SQLITE_TABLE_PRODUK_COL_ID_PROVIDER, SqliteHelper.SQLITE_TABLE_PRODUK_COL_KODE, 
-//			SqliteHelper.SQLITE_TABLE_PRODUK_COL_NOMINAL, SqliteHelper.SQLITE_TABLE_PRODUK_COL_HARGA_SERVER, 
-//			SqliteHelper.SQLITE_TABLE_PRODUK_COL_HARGA_AGEN, SqliteHelper.SQLITE_TABLE_PRODUK_COL_CREATED_AT, 
-//			SqliteHelper.SQLITE_TABLE_PRODUK_COL_UPDATED_AT};
-	
 	private static String[] allColoumns = { SqliteHelper.SQLITE_TABLE_PRODUK_COL_ID,
+			SqliteHelper.SQLITE_TABLE_PRODUK_COL_ID_PROVIDER, SqliteHelper.SQLITE_TABLE_PRODUK_COL_KODE, 
+			SqliteHelper.SQLITE_TABLE_PRODUK_COL_NOMINAL, SqliteHelper.SQLITE_TABLE_PRODUK_COL_HARGA_SERVER, 
+			SqliteHelper.SQLITE_TABLE_PRODUK_COL_HARGA_AGEN, SqliteHelper.SQLITE_TABLE_PRODUK_COL_CREATED_AT, 
+			SqliteHelper.SQLITE_TABLE_PRODUK_COL_UPDATED_AT};
+	
+/*	private static String[] allColoumns = { SqliteHelper.SQLITE_TABLE_PRODUK_COL_ID,
 		SqliteHelper.SQLITE_TABLE_PRODUK_COL_ID_PROVIDER, SqliteHelper.SQLITE_TABLE_PRODUK_COL_KODE, 
 		SqliteHelper.SQLITE_TABLE_PRODUK_COL_NOMINAL, SqliteHelper.SQLITE_TABLE_PRODUK_COL_HARGA_SERVER, 
-		SqliteHelper.SQLITE_TABLE_PRODUK_COL_HARGA_AGEN};
+		SqliteHelper.SQLITE_TABLE_PRODUK_COL_HARGA_AGEN};*/
 
 	public DataSourceProduk(Context context) {
 		dbHelper = new SqliteHelper(context);
@@ -67,8 +69,8 @@ public class DataSourceProduk {
 			produk.setNominal(cursor.getLong(3));
 			produk.setHargaServer(cursor.getLong(4));
 			produk.setHargaAgen(cursor.getLong(5));
-//			produk.setCreatedAt(cursor.getString(6));
-//			produk.setUpdatedAt(cursor.getString(7));
+			produk.setCreatedAt(cursor.getString(6));
+			produk.setUpdatedAt(cursor.getString(7));
 			produkList.add(produk);
 			produk = new Produk();
 			cursor.moveToNext();
@@ -98,8 +100,8 @@ public class DataSourceProduk {
 			produk.setNominal(cursor.getLong(3));
 			produk.setHargaServer(cursor.getLong(4));
 			produk.setHargaAgen(cursor.getLong(5));
-//			produk.setCreatedAt(cursor.getString(6));
-//			produk.setUpdatedAt(cursor.getString(7));
+			produk.setCreatedAt(cursor.getString(6));
+			produk.setUpdatedAt(cursor.getString(7));
 			produkList.add(produk);
 			produk = new Produk();
 			cursor.moveToNext();
@@ -121,21 +123,17 @@ public class DataSourceProduk {
 		values.put(SqliteHelper.SQLITE_TABLE_PRODUK_COL_NOMINAL, produk.getNominal());
 		values.put(SqliteHelper.SQLITE_TABLE_PRODUK_COL_HARGA_SERVER, produk.getHargaServer());
 		values.put(SqliteHelper.SQLITE_TABLE_PRODUK_COL_HARGA_AGEN, produk.getHargaAgen());
-//		values.put(SqliteHelper.SQLITE_TABLE_PRODUK_COL_ID_PROVIDER, 1);
-//		values.put(SqliteHelper.SQLITE_TABLE_PRODUK_COL_KODE, "S3");
-//		values.put(SqliteHelper.SQLITE_TABLE_PRODUK_COL_NOMINAL, 10);
-//		values.put(SqliteHelper.SQLITE_TABLE_PRODUK_COL_HARGA_SERVER, 11);
-//		values.put(SqliteHelper.SQLITE_TABLE_PRODUK_COL_HARGA_AGEN, 15);
-		// set the format to sql date time
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-//		Date date = new Date();
-//		
-//		values.put(SqliteHelper.SQLITE_TABLE_PRODUK_COL_CREATED_AT, dateFormat.format(date));
-//		values.put(SqliteHelper.SQLITE_TABLE_PRODUK_COL_UPDATED_AT, dateFormat.format(date));
+		
+//		 set the format to sql date time
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+		Date date = new Date();
+		
+		values.put(SqliteHelper.SQLITE_TABLE_PRODUK_COL_CREATED_AT, dateFormat.format(date).toString());
+		values.put(SqliteHelper.SQLITE_TABLE_PRODUK_COL_UPDATED_AT, dateFormat.format(date).toString());
 ////		values.put(SqliteHelper.SQLITE_TABLE_PRODUK_COL_CREATED_AT, produk.getCreatedAt());
 //		values.put(SqliteHelper.SQLITE_TABLE_PRODUK_COL_UPDATED_AT, produk.getUpdatedAt());
-
-		return db.insertOrThrow(SqliteHelper.SQLITE_TABLE_PRODUK, null, values);
+		Long result = db.insert(SqliteHelper.SQLITE_TABLE_PRODUK, null, values);
+		return result;
 	}
 	
 	public void updateRow(Produk produk) {
@@ -147,10 +145,10 @@ public class DataSourceProduk {
 		values.put(SqliteHelper.SQLITE_TABLE_PRODUK_COL_HARGA_AGEN, produk.getHargaAgen());
 		
 		// set the format to sql date time
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-//		Date date = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+		Date date = new Date();
 		
-//		values.put(SqliteHelper.SQLITE_TABLE_PRODUK_COL_UPDATED_AT, dateFormat.format(date));		
+		values.put(SqliteHelper.SQLITE_TABLE_PRODUK_COL_UPDATED_AT, dateFormat.format(date).toString());		
 //		values.put(SqliteHelper.SQLITE_TABLE_PRODUK_COL_CREATED_AT, produk.getCreatedAt());
 //		values.put(SqliteHelper.SQLITE_TABLE_PRODUK_COL_UPDATED_AT, produk.getUpdatedAt());
 		

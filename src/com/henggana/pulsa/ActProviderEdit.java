@@ -1,8 +1,5 @@
 package com.henggana.pulsa;
 
-import java.sql.SQLOutput;
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -47,7 +44,7 @@ public class ActProviderEdit extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				ArrayList<String> data = new ArrayList<String>();
+//				ArrayList<String> data = new ArrayList<String>();
 //				if(mRowId != null){
 //					data.add(mRowId.toString());
 //				}

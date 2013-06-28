@@ -90,9 +90,9 @@ public class ActProduk extends ListActivity {
     public void onCreateContextMenu(ContextMenu menu, View v,
             ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        menu.setHeaderTitle("Delete");
+//        menu.setHeaderTitle("Delete");
         menu.add(0, DELETE_ID, 0, R.string.menu_delete);
-        menu.add(0, UPDATE_ID, 0, R.string.menu_update);
+//        menu.add(0, UPDATE_ID, 0, R.string.menu_update);
     }
 
     @Override
@@ -112,23 +112,10 @@ public class ActProduk extends ListActivity {
 //    			startActivity(getIntent());
             	AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
             	Produk produk = itemList.get((int)info.position);
-//              DataSourceProvider ids = new DataSourceProvider(getApplicationContext());
-//    			ids.open();
-//    			ids.deleteRow(provider);
-//    			ids.close();
-//    			
-//
-//
-//    			new GetAllRowTask().execute();
+
             	AlertDialog deleteDialog = AskOption(produk);
             	deleteDialog.show();
             	
-//            	if(deleteDialogResult==1){
-//            		DataSourceProvider ids = new DataSourceProvider(getApplicationContext());
-//        			ids.open();
-//        			ids.deleteRow(provider);
-//        			ids.close();
-//            	}
                 return true;
 //                break;
             case UPDATE_ID:
@@ -176,7 +163,7 @@ public class ActProduk extends ListActivity {
      			ids.deleteRow(produk);
      			ids.close();
     			dialog.dismiss();
-    			new GetAllRowTask().execute();
+    			new GetAllRowTaskByIdProvider().execute();
     		}
     	})
     	
@@ -209,8 +196,6 @@ public class ActProduk extends ListActivity {
         Long hargaServer = data.getHargaServer();
         Long hargaAgen = data.getHargaAgen();
         
-        //String a = mid.toString()+nama+nomorAwalan; 
-        
         Intent i = new Intent(this, ActProdukEdit.class);
         i.putExtra(SqliteHelper.SQLITE_TABLE_PRODUK_COL_ID, mid);
         i.putExtra(SqliteHelper.SQLITE_TABLE_PRODUK_COL_ID_PROVIDER, mIdProvider);
@@ -218,12 +203,8 @@ public class ActProduk extends ListActivity {
         i.putExtra(SqliteHelper.SQLITE_TABLE_PRODUK_COL_NOMINAL, nominal);
         i.putExtra(SqliteHelper.SQLITE_TABLE_PRODUK_COL_HARGA_SERVER, hargaServer);
         i.putExtra(SqliteHelper.SQLITE_TABLE_PRODUK_COL_HARGA_AGEN, hargaAgen);
-//        i.putExtra(SqliteHelper.SQLITE_TABLE_PROVIDER_COL_NAMA, nama);
-//        i.putExtra(SqliteHelper.SQLITE_TABLE_PROVIDER_COL_NOMOR_AWALAN, nomorAwalan);
         startActivity(i);
         
-        
-        //Toast.makeText(this, a, Toast.LENGTH_SHORT).show();
     }
 
 	class GetAllRowTask extends AsyncTask<Void, Void, ArrayList<Produk>> {
@@ -270,9 +251,6 @@ public class ActProduk extends ListActivity {
 
 		@Override
 		protected ArrayList<Produk> doInBackground(Void... params) {
-			
-			/*ActProduk actProduk = new ActProduk();
-			Long providerId = actProduk.providerId;*/
 			
 			long providerId = 0;
 	        Bundle extras = getIntent().getExtras();

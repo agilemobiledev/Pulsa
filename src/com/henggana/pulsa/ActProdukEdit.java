@@ -7,8 +7,6 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class ActProdukEdit extends Activity {
 	Button bt;
@@ -18,8 +16,6 @@ public class ActProdukEdit extends Activity {
 	EditText etHargaAgen;
 	Long mRowId;
 	Long mIdProvider;
-	TextView tvIdProvider;
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +27,14 @@ public class ActProdukEdit extends Activity {
 		etNominal = (EditText)findViewById(R.id.et_nominal);
 		etHargaServer = (EditText)findViewById(R.id.et_harga_server);
 		etHargaAgen = (EditText)findViewById(R.id.et_harga_agen);
-		tvIdProvider = (TextView)findViewById(R.id.tv_id_provider);
 		
 		mRowId = null;
 		mIdProvider = null;
         Bundle extras = getIntent().getExtras();
-        if (extras != null) {
+        if (extras.containsKey(SqliteHelper.SQLITE_TABLE_PRODUK_COL_ID_PROVIDER) && extras.size()==1){
+        	 mIdProvider = extras.getLong(SqliteHelper.SQLITE_TABLE_PRODUK_COL_ID_PROVIDER);
+        }
+        else if (extras != null) {
             String kode = extras.getString(SqliteHelper.SQLITE_TABLE_PRODUK_COL_KODE);
             Long nominal = extras.getLong(SqliteHelper.SQLITE_TABLE_PRODUK_COL_NOMINAL);
             Long hargaServer = extras.getLong(SqliteHelper.SQLITE_TABLE_PRODUK_COL_HARGA_SERVER);
@@ -56,21 +54,12 @@ public class ActProdukEdit extends Activity {
             if (hargaAgen!= null) {
                 etHargaAgen.setText(hargaAgen.toString());
             }
-            if (mIdProvider!= null) {
-                tvIdProvider.setText(mIdProvider.toString());
-            }
         }
 		
 		bt.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-//				ArrayList<String> data = new ArrayList<String>();
-//				if(mRowId != null){
-//					data.add(mRowId.toString());
-//				}
-//				data.add(etNama.getText().toString());
-//				data.add(etNomorAwalan.getText().toString());
 				
 				if(mRowId != null){
 					String id = mRowId.toString();
@@ -89,8 +78,6 @@ public class ActProdukEdit extends Activity {
 					String hargaAgen = etHargaAgen.getText().toString();
 					new InsertNewRowTask().execute(idProvider, kode, nominal, hargaServer, hargaAgen);
 				}
-				
-				//new InsertNewRowTask().execute(data);
 			}
 		});
 		
@@ -106,15 +93,6 @@ public class ActProdukEdit extends Activity {
 			DataSourceProduk ids = new DataSourceProduk(getApplicationContext());
 			ids.open();
 			
-//			passed = params[0];
-//			
-//			Provider provider= new Provider();
-//			
-//			provider.setNama(passed.get(0).toString());
-//			provider.setNomorAwalan(passed.get(1).toString());
-//			ids.insertRow(provider); //query insert row ke sqlite
-//			ids.close();
-			
 			Produk produk= new Produk();
 			if(params.length == 6){
 				produk.setId(Long.parseLong(params[0]));
@@ -127,18 +105,15 @@ public class ActProdukEdit extends Activity {
 			}
 			else{
 				produk.setProviderId(Long.parseLong(params[0]));
-				produk.setKode(params[1]);
-				produk.setNominal(Long.valueOf(params[2]).longValue());
-				produk.setHargaServer(Long.valueOf(params[3]).longValue());
-				produk.setHargaAgen(Long.valueOf(params[4]).longValue());
+				produk.setKode(params[1].toString());
+				produk.setNominal(Long.parseLong(params[2]));
+				produk.setHargaServer(Long.parseLong(params[3]));
+				produk.setHargaAgen(Long.parseLong(params[4]));
 //				ids.insertRow(produk); //query insert row ke sqlite
 				
-				ids.insertRow(produk);  
+				result = ids.insertRow(produk);  
 			}
-			
-			
 			ids.close();
-
 			return null;
 			
 			//background task selesai
@@ -146,14 +121,8 @@ public class ActProdukEdit extends Activity {
 
 		@Override
 		protected void onPostExecute(Void result) {
-			
-			//launch activity berikutnya
-//			Toast.makeText(ActProdukEdit.this, result.toString(), Toast.LENGTH_LONG);
 			finish();
-//			Intent i = new Intent(ActProdukEdit.this, ActProduk.class);
-//			startActivity(i);
 		}
-
 	}
 	
 	@Override

@@ -2,15 +2,15 @@ package com.henggana.pulsa;
 
 import java.util.ArrayList;
 
-import android.app.Dialog;
+//import android.app.Dialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.Dialog;
+//import android.app.AlertDialog.Builder;
+//import android.app.Dialog;
 import android.content.DialogInterface;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -21,17 +21,17 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 //import com.henggana.pulsa.Halaman2.GetAllRowTask;
-import android.widget.Toast;
+//import android.widget.Toast;
 
 public class ActProvider extends ListActivity {
 	private ListView listview;
 	private ProgressDialog pd;
 	private ArrayList<Provider> itemList;
 
-	private static final int ACTIVITY_CREATE=0;
-    private static final int ACTIVITY_EDIT=1;
-    
-    private static final int DIALOG_ALERT_DELETE=1;
+//	private static final int ACTIVITY_CREATE=0;
+//    private static final int ACTIVITY_EDIT=1;
+//    
+//    private static final int DIALOG_ALERT_DELETE=1;
 
     private static final int INSERT_ID = Menu.FIRST;
     private static final int UPDATE_ID = Menu.FIRST + 1;
@@ -76,7 +76,6 @@ public class ActProvider extends ListActivity {
     public void onCreateContextMenu(ContextMenu menu, View v,
             ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        menu.setHeaderTitle("aaa");
         menu.add(0, DELETE_ID, 0, R.string.menu_delete);
         menu.add(0, UPDATE_ID, 0, R.string.menu_update);
     }
