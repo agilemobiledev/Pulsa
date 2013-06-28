@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp" >
+    
+    <TextView
+        android:id="@+id/tv_kode"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/tv_kode"
+        android:layout_alignBaseline="@+id/et_kode" />
+    
+    <EditText
+        android:id="@+id/et_kode"
+        android:inputType="text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tv_harga_server"
+         />
+    
+    <TextView
+        android:id="@+id/tv_nominal"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/tv_nominal"
+        android:layout_below="@id/tv_kode"
+        android:layout_alignBaseline="@+id/et_nominal" />
+    
+    <EditText
+        android:id="@+id/et_nominal"
+        android:inputType="text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_harga_server"
+        android:layout_below="@id/et_kode" />
+    
+    <TextView
+        android:id="@+id/tv_harga_server"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/tv_harga_server"
+        android:layout_below="@id/tv_nominal"
+        android:layout_alignBaseline="@+id/et_harga_server" />
+    
+    <EditText
+        android:id="@+id/et_harga_server"
+        android:inputType="text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_harga_server"
+        android:layout_below="@id/et_nominal" />
+    
+    <TextView
+        android:id="@+id/tv_harga_agen"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/tv_harga_agen"
+        android:layout_below="@id/tv_harga_server"
+        android:layout_alignBaseline="@+id/et_harga_agen" />
+    
+    <EditText
+        android:id="@+id/et_harga_agen"
+        android:inputType="text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_harga_server"
+        android:layout_below="@id/et_harga_server" />
+    
+    <Button
+        android:id="@+id/bt_submit"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:text="@string/bt_submit"
+        android:layout_alignLeft="@id/et_harga_server"
+        android:layout_below="@id/et_harga_agen" />
+    
+    <TextView
+        android:id="@+id/tv_id_provider"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/bt_submit" />
+
+</RelativeLayout>

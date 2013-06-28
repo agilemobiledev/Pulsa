@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp" >
+    
+    <TextView
+        android:id="@+id/tv_nama"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/tv_nama"
+        android:layout_alignBaseline="@+id/et_nama" />
+    
+    <EditText
+        android:id="@+id/et_nama"
+        android:inputType="text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tv_nomor_awalan"
+         />
+    
+    <TextView
+        android:id="@+id/tv_nomor_awalan"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/tv_nomor_awalan"
+        android:layout_below="@id/tv_nama"
+        android:layout_alignBaseline="@+id/et_nomor_awalan" />
+    
+    <EditText
+        android:id="@+id/et_nomor_awalan"
+        android:inputType="text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_nomor_awalan"
+        android:layout_below="@id/et_nama" />
+    
+    <Button
+        android:id="@+id/bt_submit"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:text="@string/bt_submit"
+        android:layout_alignLeft="@id/et_nomor_awalan"
+        android:layout_below="@id/et_nomor_awalan" />
+
+</RelativeLayout>

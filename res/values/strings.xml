@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Pulsa</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_act_provider">Provider</string>
+    <string name="title_activity_act_transaksi">ActTransaksi</string>
+    <string name="title_activity_act_server">ActServer</string>
+    <string name="title_activity_act_produk">ActProduk</string>
+    <string name="empty_data">Data Kosong</string>
+    <string name="menu_add">Tambah</string>
+    <string name="tv_nama">Nama</string>
+    <string name="tv_nomor_awalan">Nomor Awalan</string>
+    <string name="bt_submit">Submit</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_update">Update</string>
+    <string name="tv_kode">Kode</string>
+    <string name="tv_nominal">Nominal</string>
+    <string name="tv_harga_server">Harga Server</string>
+    <string name="tv_harga_agen">Harga Agen</string>
+
+</resources>
